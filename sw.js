@@ -2,7 +2,7 @@ self.addEventListener('install', event => {
   event.waitUntil(
     caches.open('pittsburgh-itinerary-v1').then(cache => {
       return cache.addAll([
-        './pittsburgh-itinerary.html',
+        './index.html',
         './manifest.json'
       ]);
     })
