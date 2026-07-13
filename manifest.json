@@ -1,0 +1,9 @@
+{
+  "name": "Pittsburgh Weekend Itinerary",
+  "short_name": "Pittsburgh Trip",
+  "start_url": "./pittsburgh-itinerary.html",
+  "display": "standalone",
+  "background_color": "#0b0e14",
+  "theme_color": "#1F2A44",
+  "icons": []
+}

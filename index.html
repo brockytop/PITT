@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en" class="auto">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pittsburgh Weekend Itinerary</title>
+  <meta name="theme-color" content="#1F2A44" />
+  <meta name="description" content="Interactive Pittsburgh itinerary for October 8-11, 2026 weekend trip." />
+  <link rel="manifest" href="manifest.json" />
+  <style>
+    :root{
+      --bg:#0b0e14;--bg2:#121620;--panel:#141b2a;--text:#E6E8EE;--muted:#96A0B5;
+      --brand:#1F2A44;--gold:#D4AF37;--teal:#20A4B5;--pumpkin:#E27A28;--amber:#FFC107;
+      --shadow:0 8px 30px rgba(0,0,0,.25);--r:16px;--r2:12px
+    }
+    @media (prefers-color-scheme: light){
+      :root{--bg:#FCFCF9;--bg2:#F5F6F8;--panel:#FFF;--text:#1F2A44;--muted:#556070;--shadow:0 8px 30px rgba(0,0,0,.08)}
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;padding:0;background:var(--bg);color:var(--text);font-family:system-ui}
+    header{position:sticky;top:0;background:linear-gradient(135deg,var(--brand),#0e4367);padding:12px;color:#fff;z-index:10;box-shadow:var(--shadow)}
+    header h1{margin:0;font-size:1.3rem}
+    header small{opacity:.8}
+    .tabs{display:flex;gap:6px;margin-top:8px}
+    .tabs button{flex:1;padding:8px;border:none;border-radius:8px;background:var(--panel);color:var(--text);font-weight:600;box-shadow:0 4px 12px rgba(0,0,0,.2)}
+    .tabs button.active{background:linear-gradient(180deg,var(--panel),rgba(212,175,55,.1));border:2px solid var(--gold)}
+    main{padding:12px;max-width:900px;margin:0 auto}
+    .card{background:var(--panel);border-radius:var(--r);box-shadow:var(--shadow);margin-bottom:12px;overflow:hidden}
+    .collapsible{display:flex;align-items:center;padding:12px;cursor:pointer;border-bottom:1px solid var(--bg2)}
+    .collapsible .dot{width:10px;height:10px;border-radius:50%;margin-right:12px;box-shadow:0 0 6px var(--gold)}
+    .collapsible h2{margin:0;font-size:1rem;flex:1}
+    .collapsible svg{width:16px;height:16px;transition:transform .3s}
+    .collapsed svg{transform:rotate(-90deg)}
+    .content{display:none;padding:12px;animation:fade .2s ease}
+    @keyframes fade{from{opacity:0;transform:translateY(-4px)}to{opacity:1}}
+
+    .day-section{background:var(--panel);border-radius:var(--r);box-shadow:var(--shadow);margin-bottom:16px;padding:16px}
+    .day-header{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+    .day-header h2{margin:0;font-size:1.05rem}
+    .toggle-btn{background-color:var(--amber);color:#222;border:none;padding:6px 12px;border-radius:999px;cursor:pointer;font-weight:600;font-size:.9rem}
+    .toggle-btn.active{background-color:#d52c3a;color:#fff}
+    .day-content.hidden{display:none}
+
+    .event{margin:10px 0;padding:10px 12px;background-color:rgba(212,175,55,0.06);border-left:4px solid var(--gold);border-radius:6px}
+    .event-time{font-weight:700;color:var(--amber);margin-bottom:4px}
+    .event-title{font-weight:600;margin-bottom:4px}
+    .event-address{font-size:.9rem;color:var(--muted);margin-top:4px}
+
+    .copy-btn{background-color:transparent;color:var(--teal);border:1px solid var(--teal);padding:4px 8px;border-radius:5px;cursor:pointer;font-size:.8rem;margin-top:6px}
+    .copy-btn:hover{background-color:var(--teal);color:#fff}
+
+    .about{background:var(--panel);border-radius:var(--r);box-shadow:var(--shadow);padding:16px;margin-bottom:16px}
+    .about h3{margin-top:0}
+
+    .tips{background:var(--panel);border-radius:var(--r);box-shadow:var(--shadow);padding:16px;margin-bottom:16px}
+    .tips ul{list-style-position:inside;padding-left:0}
+    .tips li{margin:6px 0}
+
+    footer{text-align:center;padding:16px;color:var(--muted);border-top:1px solid var(--bg2);margin-top:24px;font-size:.85rem}
+
+    @media (max-width:600px){
+      header h1{font-size:1.1rem}
+      .day-section{padding:12px}
+      .day-header h2{font-size:.95rem}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Pittsburgh Weekend Itinerary</h1>
+    <small>October 8–11, 2026</small>
+    <div class="tabs">
+      <button class="active" data-tab="itinerary">Itinerary</button>
+      <button data-tab="details">Trip Info</button>
+      <button data-tab="emergency">Emergency</button>
+    </div>
+  </header>
+  <main>
+    <!-- Itinerary -->
+    <section id="itinerary">
+      <!-- Day sections injected by JS -->
+    </section>
+
+    <!-- Trip Info -->
+    <section id="details" hidden>
+      <div class="about">
+        <h3>About This Weekend</h3>
+        <p>This Pittsburgh getaway brings together art, food, and city views over four days of museums, local dining, and North Shore nightlife.</p>
+        <p><strong>Airbnb:</strong> 5030 North Circle Avenue, Pittsburgh, PA 15207</p>
+        <p><strong>Airport:</strong> Pittsburgh International Airport (PIT)</p>
+      </div>
+      <div class="tips">
+        <h3>Pro Tips</h3>
+        <ul>
+          <li>Expect October evenings to be cool; pack layers for outdoor bars and riverfront walks.</li>
+          <li>Use the copy buttons on events to quickly grab addresses for navigation.</li>
+          <li>Plan ride shares between the Airbnb and North Shore to simplify parking.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Emergency -->
+    <section id="emergency" hidden>
+      <div class="card" style="border-left:4px solid #d52c3a">
+        <div style="padding:12px">
+          <h2>Emergency Info</h2>
+          <p><b>911</b> – Police / Fire / Medical (U.S.)</p>
+          <p><b>Pittsburgh Police (non-emergency):</b> 412-255-2827</p>
+          <p><b>Allegheny Health Network (general line):</b> 412-359-3131</p>
+          <p><b>UPMC Presbyterian Hospital:</b> 412-647-2345</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Last updated: <span id="lastUpdated"></span></p>
+  </footer>
+
+  <script>
+    const DAYS = [
+      {
+        label: 'Thursday, October 8 — Arrival & Primanti\'s',
+        events: [
+          {
+            time: '3:57 PM',
+            title: 'Land at Pittsburgh International Airport (PIT)',
+            address: 'Pittsburgh International Airport, PA'
+          },
+          {
+            time: '5:00 PM',
+            title: 'Check in to Airbnb',
+            address: '5030 North Circle Avenue, Pittsburgh, PA 15207'
+          },
+          {
+            time: '6:30 PM',
+            title: 'Dinner at Primanti Bros.',
+            address: 'Primanti Bros. (location of choice near Pittsburgh)'
+          }
+        ]
+      },
+      {
+        label: 'Friday, October 9 — Warhol, Mini Golf & North Shore',
+        events: [
+          {
+            time: '2:00 PM',
+            title: 'Andy Warhol Museum',
+            address: '117 Sandusky St, Pittsburgh, PA 15212'
+          },
+          {
+            time: '5:00 PM',
+            title: 'Mini Golf at The Puttery',
+            address: 'The Puttery, Pittsburgh, PA'
+          },
+          {
+            time: '7:15 PM',
+            title: 'Dinner reservations at The Melting Pot',
+            address: 'The Melting Pot, Pittsburgh, PA'
+          },
+          {
+            time: '9:00 PM',
+            title: 'North Shore bars',
+            address: 'North Shore, Pittsburgh, PA'
+          }
+        ]
+      },
+      {
+        label: 'Saturday, October 10 — Incline, Aviary & Dinner',
+        events: [
+          {
+            time: '10:00 AM',
+            title: 'Duquesne Incline',
+            address: '1197 West Carson St, Pittsburgh, PA 15219'
+          },
+          {
+            time: '1:00 PM',
+            title: 'National Aviary',
+            address: '700 Arch St, Pittsburgh, PA 15212'
+          },
+          {
+            time: '5:00 PM',
+            title: 'Dinner at Girasole',
+            address: 'Girasole, 733 Copeland St, Pittsburgh, PA 15232'
+          },
+          {
+            time: '10:00 PM',
+            title: 'Back at Airbnb to pack and sleep',
+            address: '5030 North Circle Avenue, Pittsburgh, PA 15207'
+          }
+        ]
+      },
+      {
+        label: 'Sunday, October 11 — Departure',
+        events: [
+          {
+            time: '5:30 AM',
+            title: 'Leave Airbnb for PIT airport',
+            address: '5030 North Circle Avenue, Pittsburgh, PA 15207'
+          },
+          {
+            time: '7:15 AM',
+            title: 'Flight departs for BNA',
+            address: 'Pittsburgh International Airport (PIT)'
+          }
+        ]
+      }
+    ];
+
+    function renderDays(){
+      const container = document.getElementById('itinerary');
+      container.innerHTML = '';
+      DAYS.forEach((day, idx) => {
+        const section = document.createElement('div');
+        section.className = 'day-section';
+        section.innerHTML = `
+          <div class="day-header">
+            <h2>${day.label}</h2>
+            <button class="toggle-btn" onclick="toggleSection(this)">−</button>
+          </div>
+          <div class="day-content">
+            ${day.events.map(ev => `
+              <div class="event">
+                <div class="event-time">${ev.time}</div>
+                <div class="event-title">${ev.title}</div>
+                <div class="event-address">${ev.address}</div>
+                ${ev.address ? '<button class="copy-btn" onclick="copyToClipboard(\'${ev.address.replace(/'/g, "\\'")}\')">Copy Address</button>' : ''}
+              </div>
+            `).join('')}
+          </div>
+        `;
+        container.appendChild(section);
+      });
+    }
+
+    function toggleSection(btn){
+      const content = btn.parentElement.nextElementSibling;
+      if (!content) return;
+      const isHidden = content.classList.contains('hidden');
+      content.classList.toggle('hidden');
+      btn.textContent = isHidden ? '−' : '+';
+      btn.classList.toggle('active', !isHidden);
+    }
+
+    function copyToClipboard(text){
+      navigator.clipboard.writeText(text).then(() => {
+        const button = event.target;
+        const original = button.textContent;
+        button.textContent = '✓ Copied!';
+        button.style.backgroundColor = 'var(--teal)';
+        button.style.color = '#fff';
+        setTimeout(() => {
+          button.textContent = original;
+          button.style.backgroundColor = '';
+          button.style.color = 'var(--teal)';
+        }, 2000);
+      }).catch(() => {
+        alert('Failed to copy. Try again.');
+      });
+    }
+
+    document.querySelectorAll('.tabs button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tabs button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        ['itinerary','details','emergency'].forEach(id => {
+          document.getElementById(id).hidden = btn.dataset.tab !== id;
+        });
+      });
+    });
+
+    window.addEventListener('load', () => {
+      renderDays();
+      const now = new Date();
+      document.getElementById('lastUpdated').textContent = now.toLocaleString('en-US', {
+        weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit'
+      });
+    });
+
+    if('serviceWorker' in navigator){
+      navigator.serviceWorker.register('sw.js').catch(() => {});
+    }
+  </script>
+</body>
+</html>
